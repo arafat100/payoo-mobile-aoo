@@ -1,4 +1,5 @@
 const validPin = 1234
+const transactionData = []
 
 // function to get input value number
 function getInputValueNumber(id) {
@@ -86,6 +87,11 @@ document.getElementById("add-money-btn").addEventListener("click", function (e) 
     setInnerText(totalNewAvailableBalance)
     // document.getElementById("available-balance").innerText = totalNewAvailableBalance
 
+    const data = {
+        name: "Add Money",
+        date: new Date().toLocaleTimeString()
+    }
+    transactionData.push(data)
 
 
 })
@@ -124,6 +130,35 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
     setInnerText(totalNewAvailableBalance)
     // document.getElementById("available-balance").innerText = totalNewAvailableBalance
 
+    const data = {
+        name: "Cash Out",
+        date: new Date().toLocaleTimeString()
+    }
+    transactionData.push(data)
+
+})
+document.getElementById("transaction-button").addEventListener("click", function () {
+    const transactionContainer = document.getElementById("transaction-container")
+
+    for (const data of transactionData) {
+        const div = document.createElement("div")
+        div.innerHTML = `
+            <div class="bg-white p-3 rounded-xl   flex justify-between items-center">
+                 <div class="flex items-center">
+                    <div class="border-2 p-3 rounded-full bg-[#f4f5f7]">
+                            <img src="./assets/wallet1.png" class="mx-auto" alt="">
+                    </div>
+                     <div class="ml-3">
+                            <h1>$(data.name)</h1>
+                            <p>$(data.date)</p>
+                    </div>
+                </div>
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+        `
+
+
+    }
 })
 
 
@@ -190,5 +225,19 @@ document.getElementById("bonus-button").addEventListener("click", function () {
     handleToggle("get-bonus-parent")
 
     handleToggleButton("bonus-button")
+
+})
+document.getElementById("bill-button").addEventListener("click", function () {
+
+    handleToggle("pay-bill-parent")
+
+    handleToggleButton("bill-button")
+
+})
+document.getElementById("transaction-button").addEventListener("click", function () {
+
+    handleToggle("transaction-parent")
+
+    handleToggleButton("transaction-button")
 
 })
